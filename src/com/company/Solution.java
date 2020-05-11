@@ -1,8 +1,7 @@
-// package com.javarush.task.task07.task0709;
+package com.company;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.IOException;
 import java.util.*;                                                                                                   
                                                                                                     
 /*                                                                                                     
@@ -20,28 +19,31 @@ public class Solution {
         ArrayList<String> list = new ArrayList<>();
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
-        int tmp = 100;
-        String minText = null;
-        String minText2 = null;
-
+        // считываем пять строк и сразу записываем в массив
         for (int i = 0; i < 5; i++) {
             String text = in.readLine();
             list.add(text);
         }
 
-        for(int i = 0; i < list.length; i++){
-            for(int j = 0; j < list.length - 1 - i; j++){
-                if(list[j].length() > list[j + 1].length()){
-                    String str = list[j];
-                    list[j] = list[j + 1];
-                    list[j + 1] = str;
+        // сортируем массив по возрастанию методом пузырька
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j < list.size() - 1 - i; j++) {
+                if ((list.get(j)).length() > (list.get(j + 1)).length()) {
+                    String str = list.get(j);
+                    list.set(j, list.get(j + 1));
+                    list.set(j + 1, str);
                 }
             }
         }
 
-//вывод массива
-        for(String s : list){
-            System.out.println(s);
-        }
+        // пробегаем по сортированному массиву, выводя на экран первый элемент и каждый последующий, если он равен предыдущему
+        int j = 0;
+
+        do {
+            System.out.println(list.get(j));
+            j++;
+            if (j == 5)
+                break;
+        } while ((list.get(j - 1)).length() == (list.get(j)).length());
     }
 }
